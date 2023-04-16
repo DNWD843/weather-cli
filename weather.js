@@ -6,7 +6,6 @@ import { logHelp } from "./services/index.js";
 
 const initCLI = () => {
   const commandLineArgs = resolveArguments(process.argv)
-  console.log(commandLineArgs)
 
   if (commandLineArgs[shortKeys.HELP]) {
     logHelp()

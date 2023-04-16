@@ -18,9 +18,9 @@ export const logSuccess = msg => {
 export const logHelp = () => {
   console.log(
   dedent`${chalk.bgHex('#FFD700').hex('#D2691E').bold(` ${titles.HELP} `)}
-  ${gold('no-parameters')} ${lightGrey('- to show weather forecast for saved city')}
-  ${gold(`-${shortKeys.CITY}`)}  ${lightGrey('[CITY] to set another city')}
-  ${gold(`-${shortKeys.TOKEN}`)}  ${lightGrey('[API_KEY] to set token')}
-  ${gold(`-${shortKeys.HELP}`)}  ${lightGrey('[HELP] to see help')}
+    ${gold('no-parameters')} ${lightGrey('- to show weather forecast for saved city')}
+    ${gold(`-${shortKeys.CITY}`)}  ${lightGrey('[CITY] to set another city')}
+    ${gold(`-${shortKeys.TOKEN}`)}  ${lightGrey('[API_KEY] to set token')}
+    ${gold(`-${shortKeys.HELP}`)}  ${lightGrey('[HELP] to see help')}
   `)
 }
