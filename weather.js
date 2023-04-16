@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { resolveArguments } from "./helpers";
+import { resolveArguments } from "./helpers/index.js";
 import { shortKeys } from "./constants/index.js";
 
 const initCLI = () => {
