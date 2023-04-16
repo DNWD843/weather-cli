@@ -2,13 +2,14 @@
 
 import { resolveArguments } from "./helpers/index.js";
 import { shortKeys } from "./constants/index.js";
+import { logHelp } from "./services/index.js";
 
 const initCLI = () => {
   const commandLineArgs = resolveArguments(process.argv)
   console.log(commandLineArgs)
 
   if (commandLineArgs[shortKeys.HELP]) {
-    // show help
+    logHelp()
   }
 
   if (commandLineArgs[shortKeys.CITY]) {
