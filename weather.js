@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-import { resolveArguments } from "./helpers/index.js";
+import { resolveArguments, setToken } from "./helpers/index.js";
 import { shortKeys } from "./constants/index.js";
-import { logHelp } from "./services/index.js";
+import { LogService } from "./services/index.js";
 
 const initCLI = () => {
   const commandLineArgs = resolveArguments(process.argv)
 
   if (commandLineArgs[shortKeys.HELP]) {
-    logHelp()
+    LogService.logHelp()
   }
 
   if (commandLineArgs[shortKeys.CITY]) {
@@ -16,7 +16,8 @@ const initCLI = () => {
   }
 
   if (commandLineArgs[shortKeys.TOKEN]) {
-    // save token
+    return setToken(commandLineArgs[shortKeys.TOKEN])
+
   }
 
   // show weather

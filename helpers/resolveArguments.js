@@ -1,5 +1,5 @@
 import { SECOND_CHAR_INDEX, SHORT_KEY_FULL_LENGTH, SHORT_KEY_PREFIX } from "../constants/index.js";
-import { logError } from "../services/index.js";
+import { LogService } from "../services/index.js";
 
 export const resolveArguments = ([executer, file, ...params]) => params.reduce((result, argument, index, source) => {
   const shortKey = argument.length === SHORT_KEY_FULL_LENGTH && argument.startsWith(SHORT_KEY_PREFIX)
@@ -19,7 +19,7 @@ export const resolveArguments = ([executer, file, ...params]) => params.reduce((
   }
 
   if (argument.startsWith(SHORT_KEY_PREFIX) && argument.length > SHORT_KEY_FULL_LENGTH) {
-    logError(`Incorrect parameter: ${argument}`)
+    LogService.logError(`Incorrect parameter: ${argument}`)
   }
 
   return result
