@@ -22,7 +22,7 @@ export class StorageService {
     this.#data = {}
   }
 
-  static #isExisting = async path => {
+  static #checkFileExistence = async path => {
     try {
       const stat = await promises.stat(path)
 
@@ -40,7 +40,7 @@ export class StorageService {
 
   static saveValue = async ({ key, value }) => {
     this.#clearData()
-    const isFileExists = await this.#isExisting(this.#filePath)
+    const isFileExists = await this.#checkFileExistence(this.#filePath)
 
     if (isFileExists) {
       this.#data = await this.#getFileData(this.#filePath)
@@ -53,7 +53,7 @@ export class StorageService {
   }
 
   static getValue = async key => {
-    const isFileExists = await this.#isExisting(this.#filePath)
+    const isFileExists = await this.#checkFileExistence(this.#filePath)
 
     if (isFileExists) {
       const data = await this.#getFileData(this.#filePath)
