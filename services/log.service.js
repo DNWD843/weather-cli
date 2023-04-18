@@ -9,7 +9,7 @@ const gold = chalk.hex('#FFD700')
 
 export class LogService {
   static #help = dedent`${chalk.bgHex('#FFD700').hex('#D2691E').bold(` ${titles.HELP} `)}
-    ${gold('no-parameters')} ${lightGrey('- to see weather forecast for saved city')}
+    ${gold('no-parameters')} ${lightGrey('- to see forecast for saved city')}
     ${gold(`-${shortKeys.CITY}`)}  ${lightGrey('[CITY] to set city')}
     ${gold(`-${shortKeys.TOKEN}`)}  ${lightGrey('[API_KEY] to set token')}
     ${gold(`-${shortKeys.HELP}`)}  ${lightGrey('[HELP] to see help')}
