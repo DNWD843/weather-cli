@@ -3,7 +3,6 @@ export const shortKeys = {
   CITY: 'c',
   TOKEN: 't',
   QUERY_PARAMS: 'p',
-  SHOW_SAVED_CITY: 's',
 }
 
 export const dataKeyNames = {

@@ -15,7 +15,6 @@ export class LogService {
     ${gold(`-${shortKeys.QUERY_PARAMS} [CITY_NAME STATE_CODE COUNTRY_CODE]`)} ${lightGrey('- to get forecast by passed city name, state code and country code')}
     ${gold(`-${shortKeys.CITY} [CITY_NAME] or [CITY_NAME/COUNTRY_CODE] or [CITY_NAME/STATE_CODE/COUNTRY_CODE]`)}  ${lightGrey('- to set city')}
     ${gold(`-${shortKeys.TOKEN} [API_KEY]`)}  ${lightGrey('- to set token')}
-    ${gold(`-${shortKeys.SHOW_SAVED_CITY}`)}  ${lightGrey('- to see saved city')}
     ${gold(`-${shortKeys.HELP}`)}  ${lightGrey('- to see help')}
     
     ${magenta('EXAMPLES:')}
@@ -27,7 +26,6 @@ export class LogService {
     ${magenta('weather -c moscow/us')}
     ${magenta('weather -c moscow/idaho/us')}
     ${magenta('weather -t some_api_key')}
-    ${magenta('weather -s')}
   `
 
   static logError = err => {
