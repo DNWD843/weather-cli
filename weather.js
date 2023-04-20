@@ -11,8 +11,17 @@ const initCLI = () => {
   const commandLineArgs = resolveArguments(process.argv)
   console.log(process.env.OPEN_WEATHER_API_KEY)
 
+  if (!commandLineArgs || !Object.keys(commandLineArgs).length) {
+    return
+  }
+
   if (commandLineArgs[shortKeys.HELP]) {
     LogService.logHelp()
+  }
+
+  if (commandLineArgs[shortKeys.QUERY_PARAMS]) {
+    console.log(commandLineArgs[shortKeys.QUERY_PARAMS])
+    // request forecast
   }
 
   if (commandLineArgs[shortKeys.CITY]) {

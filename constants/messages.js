@@ -4,4 +4,5 @@ export const messages = {
   SET_VALUE_FAILURE: 'Something went wrong.',
   EMPTY_VALUE: 'Value can not be empty.',
   SUCCESS_DEFAULT: 'Success!',
+  INCORRECT_COMMAND: 'Incorrect command. For help use "-h" key.',
 }

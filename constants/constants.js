@@ -8,3 +8,8 @@ export const titles = {
   HELP: 'HELP',
   WEATHER: 'WEATHER',
 }
+
+export const SHORT_KEYS_CORRECT_QUANTITY = 1
+
+export const PARAMS_REQUIRED_QUANTITY = 2
+export const PARAMS_MAX_ENABLED_QUANTITY = 4
