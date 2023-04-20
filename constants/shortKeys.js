@@ -1,7 +1,7 @@
 export const shortKeys = {
   HELP: 'h',
-  CITY: 'c',
-  TOKEN: 't',
+  SET_CITY: 'c',
+  SET_TOKEN: 't',
   QUERY_PARAMS: 'p',
 }
 

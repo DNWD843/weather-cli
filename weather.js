@@ -24,12 +24,16 @@ const initCLI = () => {
     // request forecast
   }
 
-  if (commandLineArgs[shortKeys.CITY]) {
-    return setValue({ key: dataKeyNames.CITY, value: commandLineArgs[shortKeys.CITY] })
+  if (commandLineArgs[shortKeys.SET_CITY]) {
+    const value = commandLineArgs[shortKeys.SET_CITY].length > 1
+      ? commandLineArgs[shortKeys.SET_CITY].join(', ')
+      : commandLineArgs[shortKeys.SET_CITY][0]
+
+    return setValue({ key: dataKeyNames.CITY, value })
   }
 
-  if (commandLineArgs[shortKeys.TOKEN]) {
-    return setValue({ key: dataKeyNames.TOKEN, value: commandLineArgs[shortKeys.TOKEN] })
+  if (commandLineArgs[shortKeys.SET_TOKEN]) {
+    return setValue({ key: dataKeyNames.TOKEN, value: commandLineArgs[shortKeys.SET_TOKEN] })
 
   }
 

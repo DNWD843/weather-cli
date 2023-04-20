@@ -13,8 +13,8 @@ export class LogService {
     ${gold(`-${shortKeys.QUERY_PARAMS} [CITY_NAME]`)} ${lightGrey('- to get forecast by passed city name')}
     ${gold(`-${shortKeys.QUERY_PARAMS} [CITY_NAME COUNTRY_CODE]`)} ${lightGrey('- to get forecast by passed city name and country code')}
     ${gold(`-${shortKeys.QUERY_PARAMS} [CITY_NAME STATE_CODE COUNTRY_CODE]`)} ${lightGrey('- to get forecast by passed city name, state code and country code')}
-    ${gold(`-${shortKeys.CITY} [CITY_NAME] or [CITY_NAME/COUNTRY_CODE] or [CITY_NAME/STATE_CODE/COUNTRY_CODE]`)}  ${lightGrey('- to set city')}
-    ${gold(`-${shortKeys.TOKEN} [API_KEY]`)}  ${lightGrey('- to set token')}
+    ${gold(`-${shortKeys.SET_CITY} [CITY_NAME] or [CITY_NAME/COUNTRY_CODE] or [CITY_NAME/STATE_CODE/COUNTRY_CODE]`)}  ${lightGrey('- to set city')}
+    ${gold(`-${shortKeys.SET_TOKEN} [API_KEY]`)}  ${lightGrey('- to set token')}
     ${gold(`-${shortKeys.HELP}`)}  ${lightGrey('- to see help')}
     
     ${magenta('EXAMPLES:')}

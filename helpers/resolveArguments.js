@@ -29,20 +29,21 @@ export const resolveArguments = ([executer, file, ...params]) => {
     const isIncorrectShortKey = (argument.startsWith(SHORT_KEY_PREFIX) && argument.length > SHORT_KEY_FULL_LENGTH) ||
       (shortKey && !Object.values(shortKeys).includes(shortKey))
 
-    const isIncorrectCitySearchCommand = (shortKey === shortKeys.QUERY_PARAMS && !relatedArgument) ||
-      (shortKey === shortKeys.QUERY_PARAMS &&  source.length > PARAMS_MAX_ENABLED_QUANTITY)
+    const isCommandRelatedToCity = shortKey === shortKeys.QUERY_PARAMS || shortKey === shortKeys.SET_CITY
+
+    const isIncorrectCityParamsQuantity = isCommandRelatedToCity && (!relatedArgument || source.length > PARAMS_MAX_ENABLED_QUANTITY)
 
     if (isIncorrectShortKey) {
       LogService.logError(`Incorrect parameter: ${argument}`)
     }
 
-    if (isIncorrectCitySearchCommand) {
+    if (isIncorrectCityParamsQuantity) {
       LogService.logError(messages.INCORRECT_COMMAND)
 
       return result
     }
 
-    if (shortKey === shortKeys.QUERY_PARAMS) {
+    if (isCommandRelatedToCity) {
       result[shortKey] = source.slice(1)
 
       return result

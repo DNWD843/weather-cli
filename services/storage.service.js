@@ -15,7 +15,7 @@ import { promises } from 'fs'
  */
 
 export class StorageService {
-  static #filePath = join(homedir(), 'weatherCLI.config.json')
+  static #filePath = join(homedir(), 'weatherCLI-data.json')
   static #data = {}
 
   static #clearData = () => {
