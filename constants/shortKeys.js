@@ -2,10 +2,11 @@ export const shortKeys = {
   HELP: 'h',
   SET_CITY: 'c',
   SET_TOKEN: 't',
-  QUERY_PARAMS: 'p',
+  FIND_CITY: 'f',
 }
 
 export const dataKeyNames = {
-  CITY: 'city',
+  DEFAULT_CITY: 'city_by_default',
   TOKEN: 'token',
+  CITIES: 'cities',
 }

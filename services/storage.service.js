@@ -38,7 +38,7 @@ export class StorageService {
     return JSON.parse(file)
   }
 
-  static saveValue = async ({ key, value }) => {
+  static saveData = async ({ key, value }) => {
     this.#clearData()
     const isFileExists = await this.#checkFileExistence(this.#filePath)
 
@@ -52,7 +52,7 @@ export class StorageService {
     return true
   }
 
-  static getValue = async key => {
+  static getData = async key => {
     const isFileExists = await this.#checkFileExistence(this.#filePath)
 
     if (isFileExists) {
