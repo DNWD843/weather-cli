@@ -1,8 +1,9 @@
 export const shortKeys = {
   HELP: 'h',
-  SET_DEFAULT_CITY: 'c',
+  SET_DEFAULT_CITY: 's',
   SET_TOKEN: 't',
-  FIND_CITY: 'f',
+  WEATHER_FOR_CITY: 'w',
+  FORECAST_FOR_CITY: 'f',
 }
 
 export const dataKeyNames = {

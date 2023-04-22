@@ -31,7 +31,7 @@ export const resolveArguments = ([executer, file, ...params]) => {
     const isIncorrectShortKey = (argument.startsWith(SHORT_KEY_PREFIX) && argument.length > SHORT_KEY_FULL_LENGTH) ||
       (shortKey && !Object.values(shortKeys).includes(shortKey))
 
-    const isCommandRelatedToCity = shortKey === shortKeys.FIND_CITY || shortKey === shortKeys.SET_DEFAULT_CITY
+    const isCommandRelatedToCity = shortKey === shortKeys.WEATHER_FOR_CITY || shortKey === shortKeys.SET_DEFAULT_CITY
 
     const isIncorrectCityParamsQuantity = isCommandRelatedToCity && (!relatedArgument || source.length > PARAMS_MAX_ENABLED_QUANTITY)
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { apiConfig, GEO_CODING_URL, WEATHER_URL } from '../constants/index.js'
+import { apiConfig, GEO_CODING_URL, messages, WEATHER_URL } from '../constants/index.js'
 import https from 'https'
 
 export class ApiService {
@@ -38,6 +38,10 @@ export class ApiService {
     })
 
     const [geoData] = data
+
+    if (!geoData) {
+      throw new Error(messages.NOT_FOUND)
+    }
 
     const { name, state, country, lat, lon } = geoData
 

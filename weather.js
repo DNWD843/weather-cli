@@ -20,8 +20,8 @@ const initCLI = () => {
       return logHelp()
     }
 
-    if (commandLineArgs[shortKeys.FIND_CITY]) {
-      return getWeatherByParams(commandLineArgs[shortKeys.FIND_CITY])
+    if (commandLineArgs[shortKeys.WEATHER_FOR_CITY]) {
+      return getWeatherByParams(commandLineArgs[shortKeys.WEATHER_FOR_CITY])
     }
 
     if (commandLineArgs[shortKeys.SET_DEFAULT_CITY]) {

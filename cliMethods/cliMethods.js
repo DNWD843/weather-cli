@@ -22,7 +22,7 @@ export async function getWeatherByParams(cityParams) {
     } else {
       const fetchedCoords = await ApiService.fetchCoordinates({ cityParams: cityParams.join(CITY_URL_PARAMS_SEPARATOR), token })
 
-      const { lat, lon, country, state, name } = fetchedCoords
+      const { lat, lon } = fetchedCoords
       latitude = lat
       longitude = lon
     }
@@ -31,17 +31,17 @@ export async function getWeatherByParams(cityParams) {
     console.log('weather: ', weather)
     // LogService.logWeather()
   } catch (e) {
+    console.log(e)
     if (e?.response?.status === 404) {
       LogService.logError(messages.NOT_FOUND)
     } else if (e?.response?.status === 401) {
       LogService.logError(messages.INCORRECT_TOKEN)
-    } else if (e?.response.status === 400) {
+    } else if (e?.response?.status === 400) {
       LogService.logError(messages.INCORRECT_PARAMS)
     } else {
       LogService.logError(e.message)
     }
   }
-
 }
 
 export async function getWeatherForDefaultCity() {
@@ -84,7 +84,7 @@ export async function setDefaultCity(cityParams) {
     }
 
     const fetchedCoords = await ApiService.fetchCoordinates({ cityParams: cityParams.join(CITY_URL_PARAMS_SEPARATOR), token })
-    const { lat, lon, country, state, name } = fetchedCoords
+    const { lat, lon } = fetchedCoords
 
     const isSaved = await StorageService.saveData({ key: dataKeyNames.DEFAULT_CITY, value: { lat, lon } })
 
