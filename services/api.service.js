@@ -2,23 +2,23 @@ import axios from "axios";
 import { apiConfig, GEO_CODING_URL, WEATHER_URL } from "../constants/index.js";
 
 export class ApiService {
-  static async fetchCoordinates({ city_params, token }) {
+  static async fetchCoordinates({ cityParams, token }) {
     const { data } = await axios.get(GEO_CODING_URL, {
       params: {
-        q: city_params,
+        q: cityParams,
         appid: token,
         ...apiConfig
       }
     })
 
-    const [weatherData] = data
+    const [geoData] = data
 
-    const { name, state, country, lat, lon } = weatherData
+    const { name, state, country, lat, lon } = geoData
 
     return { name, state, country, lat, lon }
   }
 
-  static async fetchForecast({ lat, lon, token }) {
+  static async fetchWeather({ lat, lon, token }) {
     const { data } = await axios.get(WEATHER_URL, {
       params: {
         lat,

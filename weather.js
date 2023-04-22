@@ -1,49 +1,38 @@
 #!/usr/bin/env node
 
-import { getWeather, resolveArguments, saveData } from './helpers/index.js'
-import { dataKeyNames, shortKeys } from './constants/index.js'
-import { LogService } from './services/index.js'
+import { resolveArguments } from './helpers/index.js'
+import { shortKeys } from './constants/index.js'
 import * as dotenv from 'dotenv'
+import {
+  getWeatherByParams,
+  getWeatherForDefaultCity,
+  logHelp,
+  setDefaultCity,
+  setToken
+} from './cliMethods/cliMethods.js'
 
 dotenv.config()
 
-const initCLI = async () => {
+const initCLI = () => {
     const commandLineArgs = resolveArguments(process.argv)
-    console.log(process.env.OPEN_WEATHER_API_KEY)
-
-    if (!commandLineArgs || !Object.keys(commandLineArgs).length) {
-      return
-    }
 
     if (commandLineArgs[shortKeys.HELP]) {
-      LogService.logHelp()
+      return logHelp()
     }
 
     if (commandLineArgs[shortKeys.FIND_CITY]) {
-      console.log(commandLineArgs[shortKeys.FIND_CITY])
-
-      const weather = await getWeather(commandLineArgs[shortKeys.FIND_CITY])
-      console.log('weather: ', weather)
-
-
-      // request forecast
+      return getWeatherByParams(commandLineArgs[shortKeys.FIND_CITY])
     }
 
-    if (commandLineArgs[shortKeys.SET_CITY]) {
-      const value = commandLineArgs[shortKeys.SET_CITY].length > 1
-        ? commandLineArgs[shortKeys.SET_CITY].join(', ')
-        : commandLineArgs[shortKeys.SET_CITY][0]
-
-      return saveData({ key: dataKeyNames.DEFAULT_CITY, value })
+    if (commandLineArgs[shortKeys.SET_DEFAULT_CITY]) {
+      return setDefaultCity(commandLineArgs[shortKeys.SET_DEFAULT_CITY])
     }
 
     if (commandLineArgs[shortKeys.SET_TOKEN]) {
-      return saveData({ key: dataKeyNames.TOKEN, value: commandLineArgs[shortKeys.SET_TOKEN] })
-
+      return setToken(commandLineArgs[shortKeys.SET_TOKEN])
     }
 
-    // show weather
-
+    return getWeatherForDefaultCity()
 }
 
 initCLI()

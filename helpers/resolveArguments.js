@@ -11,7 +11,9 @@ import {
 import { LogService } from "../services/index.js";
 
 export const resolveArguments = ([executer, file, ...params]) => {
-  if (params.filter(el => el.startsWith(SHORT_KEY_PREFIX)).length > SHORT_KEYS_CORRECT_QUANTITY) {
+  const shortKeysQuantity = params.filter(el => el.startsWith(SHORT_KEY_PREFIX)).length
+
+  if (shortKeysQuantity > SHORT_KEYS_CORRECT_QUANTITY) {
     LogService.logError(messages.INCORRECT_COMMAND)
 
     return
@@ -29,7 +31,7 @@ export const resolveArguments = ([executer, file, ...params]) => {
     const isIncorrectShortKey = (argument.startsWith(SHORT_KEY_PREFIX) && argument.length > SHORT_KEY_FULL_LENGTH) ||
       (shortKey && !Object.values(shortKeys).includes(shortKey))
 
-    const isCommandRelatedToCity = shortKey === shortKeys.FIND_CITY || shortKey === shortKeys.SET_CITY
+    const isCommandRelatedToCity = shortKey === shortKeys.FIND_CITY || shortKey === shortKeys.SET_DEFAULT_CITY
 
     const isIncorrectCityParamsQuantity = isCommandRelatedToCity && (!relatedArgument || source.length > PARAMS_MAX_ENABLED_QUANTITY)
 

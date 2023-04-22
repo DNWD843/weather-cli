@@ -1,6 +1,6 @@
 export const shortKeys = {
   HELP: 'h',
-  SET_CITY: 'c',
+  SET_DEFAULT_CITY: 'c',
   SET_TOKEN: 't',
   FIND_CITY: 'f',
 }
