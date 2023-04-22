@@ -6,17 +6,19 @@ import {
   SHORT_KEY_FULL_LENGTH,
   SHORT_KEY_PREFIX,
   SHORT_KEYS_CORRECT_QUANTITY,
-  shortKeys
+  shortKeys, ERROR_KEY
 } from "../constants/index.js";
 import { LogService } from "../services/index.js";
 
 export const resolveArguments = ([executer, file, ...params]) => {
   const shortKeysQuantity = params.filter(el => el.startsWith(SHORT_KEY_PREFIX)).length
+  const relatedArgumentsQuantity = params.filter(el => !el.startsWith(SHORT_KEY_PREFIX)).length
 
-  if (shortKeysQuantity > SHORT_KEYS_CORRECT_QUANTITY) {
+  if ((!shortKeysQuantity && relatedArgumentsQuantity) || shortKeysQuantity > SHORT_KEYS_CORRECT_QUANTITY) {
     LogService.logError(messages.INCORRECT_COMMAND)
 
-    return
+
+    return {[ERROR_KEY]: true}
   }
 
   return params.reduce((result, argument, index, source) => {
@@ -37,21 +39,13 @@ export const resolveArguments = ([executer, file, ...params]) => {
 
     if (isIncorrectShortKey) {
       LogService.logError(`Incorrect parameter: ${argument}`)
-    }
-
-    if (isIncorrectCityParamsQuantity) {
+      result[ERROR_KEY] = true
+    } else if (isIncorrectCityParamsQuantity) {
       LogService.logError(messages.INCORRECT_COMMAND)
-
-      return result
-    }
-
-    if (isCommandRelatedToCity) {
+      result[ERROR_KEY] = true
+    } else if (isCommandRelatedToCity) {
       result[shortKey] = source.slice(1)
-
-      return result
-    }
-
-    if (shortKey && relatedArgument) {
+    } else if (shortKey && relatedArgument) {
       result[shortKey] = relatedArgument
     } else if (shortKey && !relatedArgument) {
       result[shortKey] = true

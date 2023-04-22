@@ -12,11 +12,10 @@ export async function getWeatherByParams(cityParams) {
 
     let latitude, longitude
     const cityKey = cityParams.join(SAVED_CITY_KEY_SEPARATOR)
+    const savedCities = await StorageService.getData(dataKeyNames.CITIES) || {}
 
-    const savedCoords = await StorageService.getData(`${dataKeyNames.CITIES}[${cityKey}]`)
-
-    if (savedCoords) {
-      const { lat, lon } = savedCoords
+    if (savedCities[cityKey]) {
+      const { lat, lon } = savedCities[cityKey]
       latitude = lat
       longitude = lon
     } else {
@@ -30,6 +29,10 @@ export async function getWeatherByParams(cityParams) {
       const { lat, lon } = fetchedCoords
       latitude = lat
       longitude = lon
+
+      savedCities[cityKey] = { lat, lon }
+
+      await StorageService.saveData({ key: dataKeyNames.CITIES, value: savedCities })
     }
 
     const weatherData = await ApiService.fetchWeather({ lat: latitude, lon: longitude, token })
@@ -80,16 +83,31 @@ export async function getWeatherForDefaultCity() {
 
 export async function setDefaultCity(cityParams) {
   try {
-    const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN)
-    if (!token) {
-      LogService.logError(messages.NO_TOKEN)
-      return
+    const cityKey = cityParams.join(SAVED_CITY_KEY_SEPARATOR)
+    const savedCities = await StorageService.getData(dataKeyNames.CITIES) || {}
+    let defaultCityCoords
+
+    if (savedCities[cityKey]) {
+      defaultCityCoords = savedCities[cityKey]
+    } else {
+      const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN)
+      if (!token) {
+        LogService.logError(messages.NO_TOKEN)
+        return
+      }
+
+      const fetchedCoords = await ApiService.fetchCoordinates({ cityParams: cityParams.join(CITY_URL_PARAMS_SEPARATOR), token })
+
+      if (!fetchedCoords) {
+        LogService.logError(messages.NOT_FOUND)
+        return
+      }
+
+      const { lat, lon } = fetchedCoords
+      defaultCityCoords =  { lat, lon }
     }
 
-    const fetchedCoords = await ApiService.fetchCoordinates({ cityParams: cityParams.join(CITY_URL_PARAMS_SEPARATOR), token })
-    const { lat, lon } = fetchedCoords
-
-    const isSaved = await StorageService.saveData({ key: dataKeyNames.DEFAULT_CITY, value: { lat, lon } })
+    const isSaved = await StorageService.saveData({ key: dataKeyNames.DEFAULT_CITY, value: defaultCityCoords })
 
     if (isSaved) {
       LogService.logSuccess(messages.SET_CITY_SUCCESS)

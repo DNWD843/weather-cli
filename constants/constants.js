@@ -15,3 +15,4 @@ export const PARAMS_REQUIRED_QUANTITY = 2
 export const PARAMS_MAX_ENABLED_QUANTITY = 4
 export const CITY_URL_PARAMS_SEPARATOR = ', '
 export const SAVED_CITY_KEY_SEPARATOR = '_'
+export const ERROR_KEY = 'error'

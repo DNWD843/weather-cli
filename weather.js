@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { resolveArguments } from './helpers/index.js'
-import { shortKeys } from './constants/index.js'
+import { ERROR_KEY, shortKeys } from './constants/index.js'
 import * as dotenv from 'dotenv'
 import {
   getWeatherByParams,
@@ -15,6 +15,10 @@ dotenv.config()
 
 const initCLI = () => {
     const commandLineArgs = resolveArguments(process.argv)
+
+    if (commandLineArgs[ERROR_KEY]) {
+      return
+    }
 
     if (commandLineArgs[shortKeys.HELP]) {
       return logHelp()
