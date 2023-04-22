@@ -22,14 +22,18 @@ export async function getWeatherByParams(cityParams) {
     } else {
       const fetchedCoords = await ApiService.fetchCoordinates({ cityParams: cityParams.join(CITY_URL_PARAMS_SEPARATOR), token })
 
+      if (!fetchedCoords) {
+        LogService.logError(messages.NOT_FOUND)
+        return
+      }
+
       const { lat, lon } = fetchedCoords
       latitude = lat
       longitude = lon
     }
 
-    const weather = await ApiService.fetchWeather({ lat: latitude, lon: longitude, token })
-    console.log('weather: ', weather)
-    // LogService.logWeather()
+    const weatherData = await ApiService.fetchWeather({ lat: latitude, lon: longitude, token })
+    LogService.logWeather(weatherData)
   } catch (e) {
     console.log(e)
     if (e?.response?.status === 404) {
@@ -59,9 +63,8 @@ export async function getWeatherForDefaultCity() {
       return
     }
 
-    const weather = await ApiService.fetchWeather({ lat: savedCity.lat, lon: savedCity.lon, token })
-    console.log('weather', weather)
-    // LogService.logWeather()
+    const weatherData = await ApiService.fetchWeather({ lat: savedCity.lat, lon: savedCity.lon, token })
+    LogService.logWeather(weatherData)
   } catch (e) {
     if (e?.response?.status === 404) {
       LogService.logError(messages.NOT_FOUND)

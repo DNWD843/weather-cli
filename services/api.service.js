@@ -40,7 +40,7 @@ export class ApiService {
     const [geoData] = data
 
     if (!geoData) {
-      throw new Error(messages.NOT_FOUND)
+      return undefined
     }
 
     const { name, state, country, lat, lon } = geoData
