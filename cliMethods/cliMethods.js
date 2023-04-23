@@ -51,7 +51,7 @@ export async function getWeatherByParams(cityParams) {
   }
 }
 
-export async function getWeatherForDefaultCity() {
+export async function getWeatherForSavedCity() {
   try {
     const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN)
     if (!token) {

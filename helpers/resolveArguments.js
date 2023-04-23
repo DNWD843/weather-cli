@@ -6,7 +6,7 @@ import {
   SHORT_KEY_FULL_LENGTH,
   SHORT_KEY_PREFIX,
   SHORT_KEYS_CORRECT_QUANTITY,
-  shortKeys, ERROR_KEY
+  shortKeys, ERROR
 } from "../constants/index.js";
 import { LogService } from "../services/index.js";
 
@@ -18,7 +18,7 @@ export const resolveArguments = ([executer, file, ...params]) => {
     LogService.logError(messages.INCORRECT_COMMAND)
 
 
-    return {[ERROR_KEY]: true}
+    return {[ERROR]: true}
   }
 
   return params.reduce((result, argument, index, source) => {
@@ -39,10 +39,10 @@ export const resolveArguments = ([executer, file, ...params]) => {
 
     if (isIncorrectShortKey) {
       LogService.logError(`Incorrect parameter: ${argument}`)
-      result[ERROR_KEY] = true
+      result[ERROR] = true
     } else if (isIncorrectCityParamsQuantity) {
       LogService.logError(messages.INCORRECT_COMMAND)
-      result[ERROR_KEY] = true
+      result[ERROR] = true
     } else if (isCommandRelatedToCity) {
       result[shortKey] = source.slice(1)
     } else if (shortKey && relatedArgument) {

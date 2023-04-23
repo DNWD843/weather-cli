@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 import { resolveArguments } from './helpers/index.js'
-import { ERROR_KEY, shortKeys } from './constants/index.js'
+import { ERROR, shortKeys } from './constants/index.js'
 import * as dotenv from 'dotenv'
 import {
   getWeatherByParams,
-  getWeatherForDefaultCity,
+  getWeatherForSavedCity,
   logHelp,
   setDefaultCity,
   setToken
@@ -16,7 +16,7 @@ dotenv.config()
 const initCLI = () => {
     const commandLineArgs = resolveArguments(process.argv)
 
-    if (commandLineArgs[ERROR_KEY]) {
+    if (commandLineArgs[ERROR]) {
       return
     }
 
@@ -36,7 +36,7 @@ const initCLI = () => {
       return setToken(commandLineArgs[shortKeys.SET_TOKEN])
     }
 
-    return getWeatherForDefaultCity()
+    return getWeatherForSavedCity()
 }
 
 initCLI()
