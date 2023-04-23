@@ -10,7 +10,9 @@ For your own rules:
 - create an [account](https://home.openweathermap.org/users/sign_up),
 - choose your [subscription plan](https://openweathermap.org/price),  
 - generate your personal API_KEY   
-- save your API_KEY in `mad_weather_cli` using command `weather -t [API_KEY]`
+- save your API_KEY in `mad_weather_cli` using command `weather -t [API_KEY]`  
+
+All saved data will be stored in a file `weatherCli-data.json` in your home directory.  
 
 ### `Installation`  
 
