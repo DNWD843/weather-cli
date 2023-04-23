@@ -1,6 +1,8 @@
 import { homedir } from 'os'
 import { join } from 'path'
 import { promises } from 'fs'
+import { ApiService } from "./api.service.js";
+import { SAVED_CITY_KEY_SEPARATOR } from "../constants/index.js";
 
 /**
  * Description of path base methods:
@@ -38,7 +40,7 @@ export class StorageService {
     return JSON.parse(file)
   }
 
-  static saveValue = async ({ key, value }) => {
+  static saveData = async ({ key, value }) => {
     this.#clearData()
     const isFileExists = await this.#checkFileExistence(this.#filePath)
 
@@ -52,7 +54,7 @@ export class StorageService {
     return true
   }
 
-  static getValue = async key => {
+  static getData = async key => {
     const isFileExists = await this.#checkFileExistence(this.#filePath)
 
     if (isFileExists) {
