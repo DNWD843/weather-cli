@@ -83,6 +83,7 @@ export async function getWeatherForSavedCity() {
 
 export async function setDefaultCity(cityParams) {
   try {
+    console.log('cityParams', cityParams)
     const cityKey = cityParams.join(SAVED_CITY_KEY_SEPARATOR)
     const savedCities = await StorageService.getData(dataKeyNames.CITIES) || {}
     let defaultCityCoords
