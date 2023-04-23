@@ -73,9 +73,6 @@ export async function getWeatherForSavedCity() {
     }
 
     const weatherData = await ApiService.fetchWeather({ lat: savedCity.lat, lon: savedCity.lon, token })
-    console.log(weatherData)
-
-
     LogService.logWeather(weatherData)
   } catch (e) {
     if (e?.response?.status === 404) {
