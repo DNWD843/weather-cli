@@ -2,5 +2,11 @@
 
 ## CLI for getting weather    
 
-## *Work in progress*    
+### `How to nstall`  
+
+`npm i mad_weather_cli -g` or `yarn add mad_weather_cli -g`
+
+### `Usage`    
+
+
 
