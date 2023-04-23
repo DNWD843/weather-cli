@@ -38,7 +38,6 @@ export async function getWeatherByParams(cityParams) {
     const weatherData = await ApiService.fetchWeather({ lat: latitude, lon: longitude, token })
     LogService.logWeather(weatherData)
   } catch (e) {
-    console.log(e)
     if (e?.response?.status === 404) {
       LogService.logError(messages.NOT_FOUND)
     } else if (e?.response?.status === 401) {
@@ -83,7 +82,6 @@ export async function getWeatherForSavedCity() {
 
 export async function setDefaultCity(cityParams) {
   try {
-    console.log('cityParams', cityParams)
     const cityKey = cityParams.join(SAVED_CITY_KEY_SEPARATOR)
     const savedCities = await StorageService.getData(dataKeyNames.CITIES) || {}
     let defaultCityCoords
