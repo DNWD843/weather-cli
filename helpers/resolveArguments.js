@@ -34,14 +34,17 @@ export const resolveArguments = ([executer, file, ...params]) => {
       (shortKey && !Object.values(shortKeys).includes(shortKey))
 
     const isCommandRelatedToCity = shortKey === shortKeys.WEATHER_FOR_CITY || shortKey === shortKeys.SET_DEFAULT_CITY
-
-    const isIncorrectCityParamsQuantity = isCommandRelatedToCity && (!relatedArgument || source.length > PARAMS_MAX_ENABLED_QUANTITY)
+    const isIncorrectCityParamsQuantity = isCommandRelatedToCity && source.length > PARAMS_MAX_ENABLED_QUANTITY
+    const isCommandWithEmptyArguments = shortKey && shortKey !== shortKeys.HELP && !relatedArgumentsQuantity
 
     if (isIncorrectShortKey) {
       LogService.logError(`Incorrect parameter: ${argument}`)
       result[ERROR] = true
     } else if (isIncorrectCityParamsQuantity) {
       LogService.logError(messages.INCORRECT_COMMAND)
+      result[ERROR] = true
+    } else if (isCommandWithEmptyArguments) {
+      LogService.logError(messages.EMPTY_VALUE)
       result[ERROR] = true
     } else if (isCommandRelatedToCity) {
       result[shortKey] = source.slice(1)
