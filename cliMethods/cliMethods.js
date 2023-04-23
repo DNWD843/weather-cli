@@ -1,9 +1,15 @@
 import { ApiService, LogService, StorageService } from '../services/index.js'
-import { CITY_URL_PARAMS_SEPARATOR, dataKeyNames, messages, SAVED_CITY_KEY_SEPARATOR } from '../constants/index.js'
+import {
+  CITY_URL_PARAMS_SEPARATOR,
+  dataKeyNames,
+  DEMO_API_KEY,
+  messages,
+  SAVED_CITY_KEY_SEPARATOR
+} from '../constants/index.js'
 
 export async function getWeatherByParams(cityParams) {
   try {
-    const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN)
+    const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN) || DEMO_API_KEY
 
     if (!token) {
       LogService.logError(messages.NO_TOKEN)
@@ -52,7 +58,8 @@ export async function getWeatherByParams(cityParams) {
 
 export async function getWeatherForSavedCity() {
   try {
-    const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN)
+    const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN) || DEMO_API_KEY
+
     if (!token) {
       LogService.logError(messages.NO_TOKEN)
       return
@@ -66,6 +73,9 @@ export async function getWeatherForSavedCity() {
     }
 
     const weatherData = await ApiService.fetchWeather({ lat: savedCity.lat, lon: savedCity.lon, token })
+    console.log(weatherData)
+
+
     LogService.logWeather(weatherData)
   } catch (e) {
     if (e?.response?.status === 404) {
@@ -89,7 +99,7 @@ export async function setDefaultCity(cityParams) {
     if (savedCities[cityKey]) {
       defaultCityCoords = savedCities[cityKey]
     } else {
-      const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN)
+      const token = process.env.OPEN_WEATHER_API_KEY || await StorageService.getData(dataKeyNames.TOKEN) || DEMO_API_KEY
       if (!token) {
         LogService.logError(messages.NO_TOKEN)
         return

@@ -47,11 +47,11 @@ export class LogService {
     const weatherDescription = description[0].toUpperCase() + description.slice(1)
 
     console.log(
-      dedent`${chalk.bgBlue(` ${titles.WEATHER} `)}   ${chalk.blue(`Погода в городе ${name}, ${country}`)}
+      dedent`${chalk.bgBlue(` ${titles.WEATHER} `)}   ${chalk.blue(`Current weather in ${name}, ${country}`)}
       ${weatherDescription}  ${iconsMap.has(iconKey) ? iconsMap.get(iconKey) : ''}
-      Температура воздуха: ${temp}°C, ощущается как ${feels_like}°C
-      Влажность воздуха: ${humidity}%
-      Скорость ветра: ${speed}м/с
+      Air temperature: ${temp}°C, feels like ${feels_like}°C
+      Air humidity: ${humidity}%
+      Wind speed: ${speed}m/sec
       `
     )
   }

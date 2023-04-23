@@ -16,3 +16,5 @@ export const PARAMS_MAX_ENABLED_QUANTITY = 4
 export const CITY_URL_PARAMS_SEPARATOR = ', '
 export const SAVED_CITY_KEY_SEPARATOR = '_'
 export const ERROR = 'error'
+
+export const DEMO_API_KEY = '61ba998ff1429d969073b9caeafda16c'
